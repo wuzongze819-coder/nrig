@@ -1,0 +1,315 @@
+/* ============================================================
+   NRIG · Minecraft 风格设计系统（原创实现，无官方素材）
+   ============================================================ */
+
+:root {
+  --mc-green: #55ff55;
+  --mc-yellow: #ffff55;
+  --mc-red: #ff5555;
+  --mc-aqua: #55ffff;
+  --mc-purple: #ff9efc;
+  --mc-gold: #ffd75e;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  background: #0c0c0c;
+  overflow: hidden;
+  font-family: 'Press Start 2P', 'PingFang SC', 'Microsoft YaHei', monospace;
+  -webkit-font-smoothing: none;
+  user-select: none;
+}
+
+* {
+  image-rendering: pixelated;
+}
+
+.font-zh {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  font-weight: 700;
+}
+
+.mc-shadow {
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.55);
+}
+
+.mc-shadow-sm {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- 按钮 ---------- */
+.mc-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px solid #000;
+  background: linear-gradient(#a8a8a8, #787878 40%, #5f5f5f);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.35),
+    inset 2px 0 0 rgba(255, 255, 255, 0.15),
+    inset -2px 0 0 rgba(0, 0, 0, 0.2);
+  color: #fff;
+  text-shadow: 2px 2px 0 #3a3a3a;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-family: inherit;
+  font-size: 13px;
+  transition: filter 0.06s;
+}
+
+.mc-btn:hover:not(:disabled) {
+  background: linear-gradient(#8fa7d8, #6d86c4 40%, #5b71b0);
+  filter: brightness(1.12);
+}
+
+.mc-btn:active:not(:disabled) {
+  box-shadow:
+    inset 0 3px 0 rgba(0, 0, 0, 0.4),
+    inset 0 -2px 0 rgba(255, 255, 255, 0.12);
+  transform: translateY(1px);
+}
+
+.mc-btn:disabled {
+  filter: grayscale(0.9) brightness(0.55);
+  cursor: not-allowed;
+}
+
+.mc-btn-green {
+  background: linear-gradient(#7ed957, #4da03a 40%, #3a7d2c);
+}
+
+.mc-btn-green:hover:not(:disabled) {
+  background: linear-gradient(#92e86a, #5cb548 40%, #478f36);
+}
+
+.mc-btn-red {
+  background: linear-gradient(#e07a7a, #b04a4a 40%, #8f3838);
+}
+
+.mc-btn-gold {
+  background: linear-gradient(#f0d060, #c8a038 40%, #a07d28);
+}
+
+/* ---------- 面板（成就/提示框风格） ---------- */
+.mc-panel {
+  background: rgba(12, 12, 12, 0.82);
+  border: 3px solid #2a2a2a;
+  outline: 2px solid #585858;
+  box-shadow: 0 0 0 2px #000;
+  color: #fff;
+}
+
+.mc-panel-light {
+  background: #c6c6c6;
+  border: 3px solid #000;
+  box-shadow:
+    inset 0 3px 0 #ffffff,
+    inset 0 -3px 0 #555555,
+    inset 3px 0 0 #ffffff,
+    inset -3px 0 0 #555555;
+  color: #2a2a2a;
+}
+
+/* ---------- 物品槽 ---------- */
+.mc-slot {
+  width: 52px;
+  height: 52px;
+  background: #8b8b8b;
+  box-shadow:
+    inset 2px 2px 0 #373737,
+    inset -2px -2px 0 #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  color: #fff;
+  text-shadow: 2px 2px 0 #3a3a3a;
+  font-size: 18px;
+}
+
+.mc-slot:hover {
+  filter: brightness(1.15);
+}
+
+.mc-slot.selected {
+  outline: 3px solid #fff;
+  z-index: 2;
+}
+
+.mc-slot.filled {
+  background: #a0a0a0;
+}
+
+.mc-slot.dark {
+  background: rgba(20, 20, 20, 0.6);
+  box-shadow:
+    inset 2px 2px 0 rgba(0, 0, 0, 0.6),
+    inset -2px -2px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* ---------- 物品栏 ---------- */
+.mc-hotbar {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(16, 16, 16, 0.75);
+  border: 3px solid #2a2a2a;
+  outline: 2px solid #585858;
+}
+
+/* ---------- 经验条 ---------- */
+.mc-xpbar {
+  height: 10px;
+  background: #181818;
+  border: 2px solid #000;
+  box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.mc-xpbar > .fill {
+  height: 100%;
+  background: linear-gradient(#a8ff40, #58c018);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4);
+  transition: width 0.35s steps(8);
+}
+
+.mc-xpbar > .notches {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0 9%, rgba(0, 0, 0, 0.45) 9% 10%);
+}
+
+/* ---------- 标题 ---------- */
+.mc-logo {
+  font-size: clamp(30px, 6vw, 64px);
+  color: #fff;
+  text-shadow:
+    4px 4px 0 #3f3f3f,
+    8px 8px 0 rgba(0, 0, 0, 0.4);
+  letter-spacing: 2px;
+}
+
+.mc-splash {
+  color: var(--mc-yellow);
+  text-shadow: 2px 2px 0 #3f3f00;
+  animation: splash-pulse 0.5s ease-in-out infinite alternate;
+  transform-origin: left center;
+}
+
+@keyframes splash-pulse {
+  from {
+    transform: scale(1) rotate(-6deg);
+  }
+  to {
+    transform: scale(1.08) rotate(-6deg);
+  }
+}
+
+/* ---------- 泥土/石头背景 ---------- */
+.dirt-bg {
+  background-size: 64px 64px;
+  image-rendering: pixelated;
+}
+
+.dirt-overlay {
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.78) 100%);
+}
+
+/* ---------- Boss 标题闪屏 ---------- */
+@keyframes boss-in {
+  0% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.95);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.boss-title {
+  animation: boss-in 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
+}
+
+/* ---------- 反馈文字 ---------- */
+@keyframes pop-in {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pop-in {
+  animation: pop-in 0.3s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
+}
+
+/* ---------- 卷动条 ---------- */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+::-webkit-scrollbar-thumb {
+  background: #5a5a5a;
+  border: 2px solid #000;
+  box-shadow: inset 0 2px 0 #8a8a8a;
+}
+
+/* ---------- 计时条 ---------- */
+.mc-timebar {
+  height: 12px;
+  border: 2px solid #000;
+  background: #181818;
+}
+
+.mc-timebar > .fill {
+  height: 100%;
+  background: linear-gradient(#5ac8fa, #2a7fc4);
+  transition: width 0.2s linear;
+}
+
+.mc-timebar.danger > .fill {
+  background: linear-gradient(#ff6a5a, #c42a2a);
+}
+
+/* ---------- 输入框 ---------- */
+.mc-input {
+  background: #181818;
+  border: 2px solid #a0a0a0;
+  color: #fff;
+  font-family: inherit;
+  padding: 10px 14px;
+  font-size: 16px;
+  outline: none;
+  text-shadow: 2px 2px 0 #3a3a3a;
+}
+
+.mc-input:focus {
+  border-color: #fff;
+}
+
+/* ---------- 减少动画 ---------- */
+.reduced-motion * {
+  animation-duration: 0.01s !important;
+  transition-duration: 0.01s !important;
+}
